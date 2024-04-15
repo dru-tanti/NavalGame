@@ -268,7 +268,7 @@ Transform:
   m_GameObject: {fileID: 391854396}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.445, y: -0.456, z: 0}
+  m_LocalPosition: {x: -1.445, y: -0.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -287,6 +287,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ship: {fileID: 11400000, guid: c219ce4e6fb0d1342be4d89c401b8d6c, type: 2}
+  rotationInterpolation: 0
+  turnSpeed: 0.05
 --- !u!61 &391854401
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -387,7 +389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunLocation: []
-  privatePF_Projectile: {fileID: 0}
+  PF_Projectile: {fileID: 0}
 --- !u!114 &391854404
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Health), typeof(Attack))]
 public class PlayerController : MonoBehaviour {
-	public Ship ship;
+	public ShipData ship;
 	private float rotation;
 	private PlayerInput _input;
 	private Collider2D _collider;
@@ -22,8 +22,8 @@ public class PlayerController : MonoBehaviour {
 		attack		= gameObject.GetComponent<Attack>();
 
 		transform.localScale = new Vector3(ship.size, ship.size, ship.size);
-		health.SetValue(ship.maxHealth);
-		attack.SetValue(ship.guns, ship.maxAmmunition);
+		health.Setup(ship);
+		attack.Setup(ship);
 	}
 
 	private void OnEnable() {

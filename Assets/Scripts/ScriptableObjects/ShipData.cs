@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Ship", menuName = "Ship", order = 0)]
-public class Ship : ScriptableObject {
+public class ShipData : ScriptableObject {
 	public float size = 1;
 	public float acceleration = 2;
 	public float speed = 5;
@@ -14,12 +14,12 @@ public class Ship : ScriptableObject {
 	[Header("Health")]
 	public int maxHealth;
 	[Tooltip("Health value below which the ship will be considered 'damaged'.")]
-	public int damagedHealth;
+	public int damagedThreshold;
 	[Tooltip("Health value below which the ship will be considered 'sinking'.")]
-	public int sinkingHealth;
+	public int sinkingThreshold;
 
 	[Header("Sprites")]
-	public Sprite undamaged;
-	public Sprite damaged;
-	public Sprite sinking;
+	public Sprite undamagedSprite;
+	public Sprite damagedSprite;
+	public Sprite sinkingSprite;
 }

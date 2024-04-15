@@ -9,9 +9,9 @@ public class Attack : MonoBehaviour {
 	[SerializeField]
 	private GameObject PF_Projectile;
 	
-	public void SetValue(int shipGuns, int startingAmmunition) {
-		guns = shipGuns;
-		ammunition = startingAmmunition;
+	public void Setup(ShipData ship) {
+		guns = ship.guns;
+		ammunition = ship.maxAmmunition;
 		// TODO: Dynamically set up gun locations.
 	}
 

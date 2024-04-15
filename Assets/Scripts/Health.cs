@@ -1,18 +1,43 @@
 using UnityEngine;
 
 public class Health : MonoBehaviour {
-	private int value = 100;
+	private int current = 100;
+	private int max;
+	private SpriteRenderer currentSprite;
+	private Sprite undamagedSprite;
 
-	public void SetValue(int health) {
-		value = health;
+	private int damagedThreshold;
+	private Sprite damagedSprite;
+
+	private int sinkingThreshold;
+	private Sprite sinkingSprite;
+
+	public void Setup(ShipData ship) {
+		max					= ship.maxHealth;
+		current				= max;
+		undamagedSprite		= ship.undamagedSprite;
+		damagedThreshold	= ship.damagedThreshold;
+		damagedSprite		= ship.damagedSprite;
+		sinkingThreshold	= ship.sinkingThreshold;
+		sinkingSprite		= ship.sinkingSprite;
+		currentSprite		= gameObject.GetComponent<SpriteRenderer>();
 	}
 
 	public void TakeDamage(int damage) {
-		value -= damage;
+		current -= damage;
+		if(current > max) current = max;
+		if(current < damagedThreshold) {
+			
+		}
+
+		if(current < 0) HandleDeath();
 	}
 
 	public int GetHealth() {
-		Destroy(gameObject);
-		return value;
+		return current;
+	}
+
+	public void HandleDeath() {
+
 	}
 }
