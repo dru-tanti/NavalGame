@@ -1,29 +1,12 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Health), typeof(Attack))]
-public class PlayerController : MonoBehaviour {
-	public ShipData ship;
-	private float rotation;
+public class PlayerController : Ship {
 	private PlayerInput _input;
-	private Collider2D _collider;
-	private Rigidbody2D _rigidbody;
-	private Health health;
-	private Attack attack;
-	public float rotationInterpolation;
-	public float turnSpeed = 0.05f;
 
-
-	private void Awake() {
+    private new void Awake() {
+		base.Awake();
 		_input      = new PlayerInput();
-		_rigidbody  = gameObject.GetComponent<Rigidbody2D>();
-		_collider   = gameObject.GetComponent<Collider2D>();
-		health		= gameObject.GetComponent<Health>();
-		attack		= gameObject.GetComponent<Attack>();
-
-		transform.localScale = new Vector3(ship.size, ship.size, ship.size);
-		health.Setup(ship);
-		attack.Setup(ship);
 	}
 
 	private void OnEnable() {
@@ -42,13 +25,6 @@ public class PlayerController : MonoBehaviour {
 		if(other.transform.tag == "Land") {
 			health.TakeDamage(50);
 		}
-	}
-
-	private void Move(Vector2 direction) {
-		_rigidbody.AddForce(direction * ship.acceleration);
-		float targetRotation = Mathf.Atan2(direction.y, direction.x) * (180/Mathf.PI) + 90;
-		rotation = Mathf.SmoothDampAngle(transform.eulerAngles.z, targetRotation, ref rotationInterpolation, turnSpeed);
-		transform.rotation = Quaternion.Euler(0, 0, rotation);
 	}
 
 	private void OnFireLeft(InputValue value) {
