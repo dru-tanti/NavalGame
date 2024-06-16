@@ -1,9 +1,9 @@
 using UnityEngine;
 
 public class Health : MonoBehaviour {
-	private int current = 100;
+	[SerializeField] private int current = 100;
 	private int max;
-	private SpriteRenderer currentSprite;
+	private SpriteRenderer spriteRenderer;
 	private Sprite undamagedSprite;
 
 	private int damagedThreshold;
@@ -20,17 +20,25 @@ public class Health : MonoBehaviour {
 		damagedSprite		= ship.damagedSprite;
 		sinkingThreshold	= ship.sinkingThreshold;
 		sinkingSprite		= ship.sinkingSprite;
-		currentSprite		= gameObject.GetComponent<SpriteRenderer>();
+		spriteRenderer		= gameObject.GetComponent<SpriteRenderer>();
 	}
 
-	public void TakeDamage(int damage) {
+	public ShipState TakeDamage(int damage) {
 		current -= damage;
 		if(current > max) current = max;
 		if(current < damagedThreshold) {
-			
+			return ShipState.Damaged;
 		}
 
-		if(current < 0) HandleDeath();
+		if(current > sinkingThreshold) {
+			return ShipState.Sinking;
+		}
+
+		if(current < 0) {
+			HandleDeath();
+			return ShipState.Sunk;
+		}
+		return ShipState.Undamaged;
 	}
 
 	public int GetHealth() {
@@ -38,6 +46,6 @@ public class Health : MonoBehaviour {
 	}
 
 	public void HandleDeath() {
-
+		Debug.Log("Death!");
 	}
 }

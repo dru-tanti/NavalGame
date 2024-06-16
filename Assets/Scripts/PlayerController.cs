@@ -1,12 +1,15 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Attack))]
 public class PlayerController : Ship {
 	private PlayerInput _input;
-
+	protected Attack attack;
     private new void Awake() {
 		base.Awake();
 		_input      = new PlayerInput();
+		attack		= gameObject.GetComponent<Attack>();
+		attack.Setup(ship);
 	}
 
 	private void OnEnable() {
@@ -23,7 +26,22 @@ public class PlayerController : Ship {
 
 	private void OnCollisionEnter2D(Collision2D other) {
 		if(other.transform.tag == "Land") {
+			Debug.Log("Hit Land!");
 			health.TakeDamage(50);
+		}
+	}
+
+	private void OnTriggerEnter2D(Collider2D other) {
+		if(other.transform.tag == "Port") {
+			Debug.Log("In Port!");
+			isPorted = true;
+		}
+	}
+
+	private void OnTriggerExit2D(Collider2D other) {
+		if(other.transform.tag == "Port") {
+			Debug.Log("Exited Port!");
+			isPorted = false;
 		}
 	}
 
